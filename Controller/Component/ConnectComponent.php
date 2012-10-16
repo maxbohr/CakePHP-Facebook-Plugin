@@ -149,6 +149,11 @@ class ConnectComponent extends Component {
 		else {
 			// attempt to find the user by their facebook id
 			$this->authUser = $this->User->findByFacebookId($this->uid);
+            // attempt to find the user by their email
+            if(empty($this->authUser) && $this->user('email')){
+                $this->authUser = $this->User->findByEmail($this->user('email'));
+            }
+
 			//if we have a user, set hasAccount
 			if(!empty($this->authUser)){
 				$this->hasAccount = true;
