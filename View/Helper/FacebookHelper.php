@@ -495,6 +495,17 @@ class FacebookHelper extends AppHelper {
 		$options = array_merge(array(
 			'perms' => 'email'
 		), (array)$options);
+
+        $loginListenerCode = '';
+        if(isSet($options['loginCode'])) {
+            $loginListenerCode = 'FB.Event.subscribe(\'auth.login\', function (response) {
+                '.$options['loginCode'].'
+            });';
+        } else {
+            $options['loginCode'] = '';
+        }
+
+
 		if ($appId = FacebookInfo::getConfig('appId')) {
 			$init = '<div id="fb-root"></div>';
 			$init .= '<script src="//connect.facebook.net/'.$this->locale.'/all.js"></script>';
@@ -508,7 +519,7 @@ class FacebookHelper extends AppHelper {
 			oauth      : true, // enable OAuth 2.0
 			xfbml      : true  // parse XFBML
 		});
-		
+
 		
 		// Checks whether the user is logged in
 		FB.getLoginStatus(function(response) {
@@ -525,6 +536,7 @@ class FacebookHelper extends AppHelper {
 			if (response.authResponse) {
 				// the user has just logged in
 				// alert('You just logged in facebook from somewhere');
+				 {$options['loginCode']}
 			} else {
 				// the user has just logged out
 				// alert('You just logged out from faceboook');
@@ -532,6 +544,7 @@ class FacebookHelper extends AppHelper {
 		});
 		
 		// Other javascript code goes here!
+		$loginListenerCode
 
 	};
 
