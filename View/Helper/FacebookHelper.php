@@ -542,7 +542,7 @@ class FacebookHelper extends AppHelper {
 				// alert('You just logged out from faceboook');
 			}
 		});
-		 
+		
 		// Other javascript code goes here!
 		$loginListenerCode
 
