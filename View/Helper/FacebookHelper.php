@@ -505,6 +505,18 @@ class FacebookHelper extends AppHelper {
             $options['loginCode'] = '';
         }
 
+        $logoutListenerCode = '';
+        if(isSet($options['logoutCode'])) {
+            $logoutListenerCode = 'FB.Event.subscribe(\'auth.logout\', function (response) {
+                '.$options['logoutCode'].'
+            });';
+        } else {
+            $options['logoutCode'] = '';
+        }
+
+        $logoutListenerCode = '';
+        $options['logoutCode'] = '';
+
 
 		if ($appId = FacebookInfo::getConfig('appId')) {
 			$init = '<div id="fb-root"></div>';
@@ -540,11 +552,13 @@ class FacebookHelper extends AppHelper {
 			} else {
 				// the user has just logged out
 				// alert('You just logged out from faceboook');
+				{$options['logoutCode']}
 			}
 		});
 
 		// Other javascript code goes here!
 		$loginListenerCode
+		$logoutListenerCode
 
 	};
 
