@@ -497,7 +497,7 @@ class FacebookHelper extends AppHelper {
 	
 	public function init($options = null, $reload = true) {
 		$options = array_merge(array(
-			'perms' => 'email'
+			'perms' => 'email,user_birthday,friends_birthday,read_friendlists'
 		), (array)$options);
 
         $loginListenerCode = '';
