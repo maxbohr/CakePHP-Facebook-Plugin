@@ -180,14 +180,19 @@ class FacebookHelper extends AppHelper {
 			), 
 			$options
 		);
+        if($options['img']){
+            $source = '/Facebook/img/'.$options['img'];
+        }
+        else {
+			$source = '/Facebook/img/facebook-logout.png';
+        }
 		if((isset($options['redirect']) && $options['redirect']) || $options['custom']){
 			$options['redirect'] = Router::url($options['redirect']);
 			$onclick = "logout('".$options['redirect']."');";
 			if(isset($options['confirm'])){
 				$onclick = 'if(confirm("'.$options['confirm'].'")){'.$onclick.'}';
 			}
-			if($options['img']){
-				$source = '/Facebook/img/'.$options['img'];
+			if(empty($options['label'])){
 				return $this->Html->image($source, array(
 				'alt' => $options['alt'],
 				'id' => $options['id'],
@@ -199,7 +204,6 @@ class FacebookHelper extends AppHelper {
 					'onclick' => $onclick, 'id' => $options['id']));
 			}
 		} else {
-			$source = '/Facebook/img/facebook-logout.png';
 			return $this->Html->image($source, array(
 				'alt' => 'Facebook logout',
 				'url' => '#',
