@@ -143,7 +143,7 @@ class ConnectComponent extends Component {
 		
 		// check if the user already has an account
 		// User is logged in but doesn't have a 
-		if($Auth->user('id')){
+		if($Auth->user($this->User->primaryKey)){
 			$this->hasAccount = true;
 			$this->User->id = $Auth->user($this->User->primaryKey);
 			if (!$this->User->field('facebook_id')) {
