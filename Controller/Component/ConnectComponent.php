@@ -196,7 +196,9 @@ class ConnectComponent extends Component {
 	* @param mixed return
 	*/
 	public function user($field = null){
-		if(isset($this->uid)){
+        
+		if(!empty($this->uid)){
+            
 			if($this->Controller->Session->read('FB.Me') == null){
 				$this->Controller->Session->write('FB.Me', $this->FB->api('/me'));
 			}
